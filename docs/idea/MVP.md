@@ -10,7 +10,7 @@ Build a dockerized, full-stack application that displays and manages a dataset o
 
 - **Backend:** Python 3.10+ - [FastAPI](Backend) 
 - **Database:** [PostgreSQL](Database.md)
-- **Frontend:** Angular using AG-Grid (Infinite Row Model)
+- **Frontend:** Angular using AG-Grid (Infinite Row Model) (see [[Frontend]])
 - **DevOps:** Docker Compose
 
 ---
