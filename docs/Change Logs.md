@@ -1,5 +1,8 @@
 ## 27-05-2026
 
+- Fixed `docker-compose.yml`: volume path updated to `/var/lib/postgresql` for postgres:18-alpine; host port changed to 5434; removed obsolete `version` attribute
+- Docker cold-start verified: all 3 services healthy, `/health` returns OK, 500 seed rows confirmed
+
 - Verified Tailwind CSS applied throughout dashboard, grid, filter, and modal; `ag-theme-quartz` applied to grid
 - Verified loading spinner signal in `grid.component.ts`; form validation (`amount > 0`, required fields) in both Pydantic schemas and Angular dashboard
 - Verified consistent `{"detail": "..."}` error JSON from backend; edge case tests for empty results and pagination boundaries in backend integration tests

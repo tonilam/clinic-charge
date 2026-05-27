@@ -124,14 +124,14 @@
 
 ## Phase 5: Integration & Docker Validation 🐳
 
-**Status**: ⏳ Waiting on Phase 3 or 4  
-**Completion**: 0 / 7
+**Status**: 🟨 In Progress  
+**Completion**: 2 / 7
 **Priority**: CRITICAL - Ship Gate
 
 | # | Task | Effort | Status | Commit Ref | Dependencies | Notes |
 |---|------|--------|--------|-----------|--------------|-------|
-| 5.1 | Docker image builds without errors | S | ⬜ | | 1.4, 2.1-2.11, 3.1-3.10 | `docker-compose build` succeeds |
-| 5.2 | Full stack cold start test | M | ⬜ | | 5.1 | `docker-compose down -v && docker-compose up --build` |
+| 5.1 | Docker image builds without errors | S | ✅ | a53a60e | 1.4, 2.1-2.11, 3.1-3.10 | `docker-compose build` succeeds |
+| 5.2 | Full stack cold start test | M | ✅ | a53a60e | 5.1 | `docker-compose down -v && docker-compose up --build` |
 | 5.3 | Automated E2E tests with Playwright | L | ⬜ | | 3.10, 2.11 | See [[E2E Testing.md]]; 5+ critical workflows automated |
 | 5.4 | Manual end-to-end flow testing | M | ⬜ | | 5.2 | Load frontend → request data → paginate → filter → create → edit → verify in DB |
 | 5.5 | Performance check (responsiveness) | M | ⬜ | | 3.6, 2.4 | Pagination under 1s, grid renders 500 rows smoothly |
