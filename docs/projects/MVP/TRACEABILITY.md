@@ -39,7 +39,7 @@
 |---|------|--------|--------|-----------|--------------|-------|
 | 2.1 | SQLAlchemy models & ORM setup | S | ✅ | 53f4f1c | 1.1, 1.4 | Charge model, relationships, timestamps |
 | 2.2 | Pydantic schemas (request/response) | S | ✅ | 92998d1 | 2.1 | ChargeCreate, ChargeUpdate, ChargeResponse |
-| 2.3 | Database connection & async pool | S | ✅ | | 1.4, 2.1 | asyncpg, connection string from env |
+| 2.3 | Database connection & async pool | S | ✅ | c2ac015 | 1.4, 2.1 | asyncpg, connection string from env |
 | 2.4 | GET /api/charges (paginated endpoint) | M | ⬜ | | 2.1, 2.2, 2.3 | LIMIT/OFFSET, startRow/endRow params |
 | 2.5 | Filtering logic (charge_type, medical_centre_name) | M | ⬜ | | 2.4 | WHERE clauses, query parameters |
 | 2.6 | Seed data generation (500 rows) | S | ⬜ | | 2.1, 1.1 | Create init.sql or Python seed script |
