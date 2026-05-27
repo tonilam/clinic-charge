@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: clinic-charge-postgres
+    environment:
+      POSTGRES_USER: ${DB_USER:-clinic_admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-secure_password_dev}
+      POSTGRES_DB: ${DB_NAME:-clinic_charges_db}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/app/db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-clinic_admin}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - clinic-network
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: clinic-charge-backend
+    environment:
+      DATABASE_URL: postgresql+asyncpg://${DB_USER:-clinic_admin}:${DB_PASSWORD:-secure_password_dev}@postgres:5432/${DB_NAME:-clinic_charges_db}
+      ENVIRONMENT: local
+      DEBUG: "true"
+      ALLOWED_ORIGINS: "http://localhost:3000,http://localhost:4200"
+    ports:
+      - "8000:8000"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend/app:/app/app
+    networks:
+      - clinic-network
+    restart: unless-stopped
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: development
+    container_name: clinic-charge-frontend
+    environment:
+      NODE_ENV: development
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    volumes:
+      - ./frontend/src:/app/src
+      - ./frontend/proxy.conf.json:/app/proxy.conf.json
+    networks:
+      - clinic-network
+    restart: unless-stopped
+    command: npm start
+
+volumes:
+  postgres_data:
+    driver: local
+
+networks:
+  clinic-network:
+    driver: bridge
