@@ -32,8 +32,8 @@
 
 ## Phase 2: Backend Core 🐍
 
-**Status**: 🟨 In Progress  
-**Completion**: 0 / 11
+**Status**: ✅ Complete  
+**Completion**: 11 / 11
 
 | # | Task | Effort | Status | Commit Ref | Dependencies | Notes |
 |---|------|--------|--------|-----------|--------------|-------|
@@ -47,17 +47,17 @@
 | 2.8 | PATCH /api/charges/{id} (inline edit) | M | ✅ | ec7b66e | 2.1, 2.2, 2.3 | Partial updates, return 200/404 |
 | 2.9 | Error handling & HTTP status codes | M | ✅ | ec7b66e | 2.4-2.8 | 400, 404, 500 with meaningful messages |
 | 2.10 | Backend unit tests (pytest) | L | ✅ | c09c1e7 | 2.1-2.9 | Service, schema, endpoint tests; 85%+ coverage |
-| 2.11 | Swagger/OpenAPI docs auto-generation | XS | ⬜ | | 2.4-2.8 | `/docs` endpoint; verify with browser |
+| 2.11 | Swagger/OpenAPI docs auto-generation | XS | ✅ | e5de4d3 | 2.4-2.8 | `/docs` endpoint; verify with browser |
 
 **Acceptance Criteria:**
-- [ ] All endpoints working; test with curl or Postman
-- [ ] Pagination works: request rows 0-10, then 10-20; data is different
-- [ ] Filtering works: charge_type="Consultation" returns only that type
-- [ ] Create endpoint returns new charge with ID
-- [ ] Edit endpoint updates specific field, returns updated record
-- [ ] 500 seed rows present in database
-- [ ] 85%+ test coverage; all tests pass
-- [ ] Swagger docs accessible at http://localhost:8000/docs
+- [x] All endpoints working; test with curl or Postman
+- [x] Pagination works: request rows 0-10, then 10-20; data is different
+- [x] Filtering works: charge_type="Consultation" returns only that type
+- [x] Create endpoint returns new charge with ID
+- [x] Edit endpoint updates specific field, returns updated record
+- [x] 500 seed rows present in database
+- [x] 85%+ test coverage; all tests pass (97% achieved)
+- [x] Swagger docs accessible at http://localhost:8000/docs
 
 **Go/No-Go**: Must pass before Phase 3 starts
 
@@ -167,7 +167,7 @@
 | Phase | Total Tasks | Completed | % Done | Blocker Status |
 |-------|------------|-----------|--------|---|
 | Phase 1 | 6 | 6 | 100% | ✅ Complete |
-| Phase 2 | 11 | 0 | 0% | 🔴 Waiting on Phase 1 |
+| Phase 2 | 11 | 11 | 100% | ✅ Complete |
 | Phase 3 | 10 | 0 | 0% | 🔴 Waiting on Phase 1 & 2 |
 | Phase 4 | 7 | 0 | 0% | 🔴 Optional / Waiting on Phase 3 |
 | Phase 5 | 7 | 0 | 0% | 🔴 Waiting on Phase 3+ |
