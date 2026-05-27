@@ -40,12 +40,12 @@
 | 2.1 | SQLAlchemy models & ORM setup | S | ✅ | 53f4f1c | 1.1, 1.4 | Charge model, relationships, timestamps |
 | 2.2 | Pydantic schemas (request/response) | S | ✅ | 92998d1 | 2.1 | ChargeCreate, ChargeUpdate, ChargeResponse |
 | 2.3 | Database connection & async pool | S | ✅ | c2ac015 | 1.4, 2.1 | asyncpg, connection string from env |
-| 2.4 | GET /api/charges (paginated endpoint) | M | ⬜ | | 2.1, 2.2, 2.3 | LIMIT/OFFSET, startRow/endRow params |
-| 2.5 | Filtering logic (charge_type, medical_centre_name) | M | ⬜ | | 2.4 | WHERE clauses, query parameters |
-| 2.6 | Seed data generation (500 rows) | S | ⬜ | | 2.1, 1.1 | Create init.sql or Python seed script |
-| 2.7 | POST /api/charges (create new charge) | S | ⬜ | | 2.1, 2.2, 2.3 | Input validation, return 201, ID in response |
-| 2.8 | PATCH /api/charges/{id} (inline edit) | M | ⬜ | | 2.1, 2.2, 2.3 | Partial updates, return 200/404 |
-| 2.9 | Error handling & HTTP status codes | M | ⬜ | | 2.4-2.8 | 400, 404, 500 with meaningful messages |
+| 2.4 | GET /api/charges (paginated endpoint) | M | ✅ | ec7b66e | 2.1, 2.2, 2.3 | LIMIT/OFFSET, startRow/endRow params |
+| 2.5 | Filtering logic (charge_type, medical_centre_name) | M | ✅ | ec7b66e | 2.4 | WHERE clauses, query parameters |
+| 2.6 | Seed data generation (500 rows) | S | ✅ | ec7b66e | 2.1, 1.1 | Create init.sql or Python seed script |
+| 2.7 | POST /api/charges (create new charge) | S | ✅ | ec7b66e | 2.1, 2.2, 2.3 | Input validation, return 201, ID in response |
+| 2.8 | PATCH /api/charges/{id} (inline edit) | M | ✅ | ec7b66e | 2.1, 2.2, 2.3 | Partial updates, return 200/404 |
+| 2.9 | Error handling & HTTP status codes | M | ✅ | ec7b66e | 2.4-2.8 | 400, 404, 500 with meaningful messages |
 | 2.10 | Backend unit tests (pytest) | L | ⬜ | | 2.1-2.9 | Service, schema, endpoint tests; 85%+ coverage |
 | 2.11 | Swagger/OpenAPI docs auto-generation | XS | ⬜ | | 2.4-2.8 | `/docs` endpoint; verify with browser |
 

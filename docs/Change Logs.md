@@ -1,5 +1,11 @@
 ## 27-05-2026
 
+- Added `backend/app/api/charges.py`: GET `/api/charges` with `startRow`/`endRow` pagination params
+- Added `backend/app/services/charge_service.py`: filtering by `charge_type` (exact) and `medical_centre_name` (ilike)
+- Added POST `/api/charges` returning 201 with created record
+- Added PATCH `/api/charges/{id}` returning updated record or 404
+- Added global 500 exception handler in `main.py`; 404 raised in charges router
+
 - Added `backend/app/models.py`: SQLAlchemy `ClinicCharge` ORM model with all fields and auto-timestamps
 - Added `backend/app/schemas.py`: Pydantic schemas `ChargeCreate`, `ChargeUpdate`, `ChargeResponse`, `ChargesListResponse` with amount validation
 - Added `backend/app/db/database.py`: async SQLAlchemy engine, session factory, and `get_db` FastAPI dependency
