@@ -1,0 +1,92 @@
+<testsuites id="" name="" tests="36" failures="0" skipped="0" errors="0" time="11.515744">
+<testsuite name="clinic-charges.spec.ts" timestamp="2026-05-27T13:10:14.753Z" hostname="chromium" tests="6" failures="0" skipped="0" time="5.275" errors="0">
+<testcase name="Clinic Charges Dashboard › should load dashboard and display grid" classname="clinic-charges.spec.ts" time="1.013">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should display 10 rows by default" classname="clinic-charges.spec.ts" time="1">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should paginate through results" classname="clinic-charges.spec.ts" time="1.097">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should filter by charge type" classname="clinic-charges.spec.ts" time="1.075">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should clear filters and show all results" classname="clinic-charges.spec.ts" time="0.841">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should show Add New Charge button" classname="clinic-charges.spec.ts" time="0.249">
+</testcase>
+</testsuite>
+<testsuite name="create-charge.spec.ts" timestamp="2026-05-27T13:10:14.753Z" hostname="chromium" tests="4" failures="0" skipped="0" time="1.84" errors="0">
+<testcase name="Create Charge › should open create form modal" classname="create-charge.spec.ts" time="0.291">
+</testcase>
+<testcase name="Create Charge › should close form on Cancel" classname="create-charge.spec.ts" time="0.396">
+</testcase>
+<testcase name="Create Charge › should validate required fields" classname="create-charge.spec.ts" time="0.311">
+</testcase>
+<testcase name="Create Charge › should create a charge and refresh grid" classname="create-charge.spec.ts" time="0.842">
+</testcase>
+</testsuite>
+<testsuite name="editing.spec.ts" timestamp="2026-05-27T13:10:14.753Z" hostname="chromium" tests="2" failures="0" skipped="0" time="2.49" errors="0">
+<testcase name="Inline Cell Editing › should edit a cell and save changes" classname="editing.spec.ts" time="1.248">
+</testcase>
+<testcase name="Inline Cell Editing › should edit charge type field" classname="editing.spec.ts" time="1.242">
+</testcase>
+</testsuite>
+<testsuite name="clinic-charges.spec.ts" timestamp="2026-05-27T13:10:14.753Z" hostname="firefox" tests="6" failures="0" skipped="0" time="8.259" errors="0">
+<testcase name="Clinic Charges Dashboard › should load dashboard and display grid" classname="clinic-charges.spec.ts" time="1.436">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should display 10 rows by default" classname="clinic-charges.spec.ts" time="1.564">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should paginate through results" classname="clinic-charges.spec.ts" time="1.816">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should filter by charge type" classname="clinic-charges.spec.ts" time="1.825">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should clear filters and show all results" classname="clinic-charges.spec.ts" time="1.121">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should show Add New Charge button" classname="clinic-charges.spec.ts" time="0.497">
+</testcase>
+</testsuite>
+<testsuite name="create-charge.spec.ts" timestamp="2026-05-27T13:10:14.753Z" hostname="firefox" tests="4" failures="0" skipped="0" time="2.59" errors="0">
+<testcase name="Create Charge › should open create form modal" classname="create-charge.spec.ts" time="0.452">
+</testcase>
+<testcase name="Create Charge › should close form on Cancel" classname="create-charge.spec.ts" time="0.554">
+</testcase>
+<testcase name="Create Charge › should validate required fields" classname="create-charge.spec.ts" time="0.589">
+</testcase>
+<testcase name="Create Charge › should create a charge and refresh grid" classname="create-charge.spec.ts" time="0.995">
+</testcase>
+</testsuite>
+<testsuite name="editing.spec.ts" timestamp="2026-05-27T13:10:14.753Z" hostname="firefox" tests="2" failures="0" skipped="0" time="3.294" errors="0">
+<testcase name="Inline Cell Editing › should edit a cell and save changes" classname="editing.spec.ts" time="1.64">
+</testcase>
+<testcase name="Inline Cell Editing › should edit charge type field" classname="editing.spec.ts" time="1.654">
+</testcase>
+</testsuite>
+<testsuite name="clinic-charges.spec.ts" timestamp="2026-05-27T13:10:14.753Z" hostname="webkit" tests="6" failures="0" skipped="0" time="6.333" errors="0">
+<testcase name="Clinic Charges Dashboard › should load dashboard and display grid" classname="clinic-charges.spec.ts" time="1.241">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should display 10 rows by default" classname="clinic-charges.spec.ts" time="1.107">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should paginate through results" classname="clinic-charges.spec.ts" time="1.217">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should filter by charge type" classname="clinic-charges.spec.ts" time="1.229">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should clear filters and show all results" classname="clinic-charges.spec.ts" time="1.063">
+</testcase>
+<testcase name="Clinic Charges Dashboard › should show Add New Charge button" classname="clinic-charges.spec.ts" time="0.476">
+</testcase>
+</testsuite>
+<testsuite name="create-charge.spec.ts" timestamp="2026-05-27T13:10:14.753Z" hostname="webkit" tests="4" failures="0" skipped="0" time="2.741" errors="0">
+<testcase name="Create Charge › should open create form modal" classname="create-charge.spec.ts" time="0.459">
+</testcase>
+<testcase name="Create Charge › should close form on Cancel" classname="create-charge.spec.ts" time="0.526">
+</testcase>
+<testcase name="Create Charge › should validate required fields" classname="create-charge.spec.ts" time="0.612">
+</testcase>
+<testcase name="Create Charge › should create a charge and refresh grid" classname="create-charge.spec.ts" time="1.144">
+</testcase>
+</testsuite>
+<testsuite name="editing.spec.ts" timestamp="2026-05-27T13:10:14.753Z" hostname="webkit" tests="2" failures="0" skipped="0" time="3.173" errors="0">
+<testcase name="Inline Cell Editing › should edit a cell and save changes" classname="editing.spec.ts" time="1.617">
+</testcase>
+<testcase name="Inline Cell Editing › should edit charge type field" classname="editing.spec.ts" time="1.556">
+</testcase>
+</testsuite>
+</testsuites>

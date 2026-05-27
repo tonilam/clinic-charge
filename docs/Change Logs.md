@@ -1,5 +1,13 @@
 ## 27-05-2026
 
+- E2E test suite: 36 tests passing across Chromium, Firefox, WebKit (Playwright)
+  - `clinic-charges.spec.ts`: load, 10-row default, pagination, filter by charge type, clear filters, Add New Charge button
+  - `editing.spec.ts`: PATCH amount and charge_type via API, verify grid reflects update after reload
+  - `create-charge.spec.ts`: open modal, cancel, validation error, full create flow
+  - `e2e/utils/grid-helper.ts`: `GridHelper` utility with `waitForGridReady`, `getCellValue`, `getFirstVisibleCellValue`, `editCell` methods
+  - Inline editing tests use direct HTTP PATCH + reload (headless AG Grid focus limitation workaround)
+  - Filter test uses Playwright auto-retrying `expect(locator).toContainText()` with 8s timeout
+
 - Fixed `docker-compose.yml`: volume path updated to `/var/lib/postgresql` for postgres:18-alpine; host port changed to 5434; removed obsolete `version` attribute
 - Docker cold-start verified: all 3 services healthy, `/health` returns OK, 500 seed rows confirmed
 

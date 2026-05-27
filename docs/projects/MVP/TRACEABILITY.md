@@ -125,14 +125,14 @@
 ## Phase 5: Integration & Docker Validation 🐳
 
 **Status**: 🟨 In Progress  
-**Completion**: 2 / 7
+**Completion**: 3 / 7
 **Priority**: CRITICAL - Ship Gate
 
 | # | Task | Effort | Status | Commit Ref | Dependencies | Notes |
 |---|------|--------|--------|-----------|--------------|-------|
 | 5.1 | Docker image builds without errors | S | ✅ | a53a60e | 1.4, 2.1-2.11, 3.1-3.10 | `docker-compose build` succeeds |
 | 5.2 | Full stack cold start test | M | ✅ | a53a60e | 5.1 | `docker-compose down -v && docker-compose up --build` |
-| 5.3 | Automated E2E tests with Playwright | L | ⬜ | | 3.10, 2.11 | See [[E2E Testing.md]]; 5+ critical workflows automated |
+| 5.3 | Automated E2E tests with Playwright | L | ✅ | f53ecaf | 3.10, 2.11 | 36 tests across Chrome/Firefox/WebKit; API-based editing tests; all passing |
 | 5.4 | Manual end-to-end flow testing | M | ⬜ | | 5.2 | Load frontend → request data → paginate → filter → create → edit → verify in DB |
 | 5.5 | Performance check (responsiveness) | M | ⬜ | | 3.6, 2.4 | Pagination under 1s, grid renders 500 rows smoothly |
 | 5.6 | Cross-browser testing (Chrome, Firefox, Safari) | M | ⬜ | | 5.3 | E2E tests run on 3 browsers via Playwright; no layout issues |
@@ -147,14 +147,14 @@
 - [ ] 500 seed rows visible in grid
 - [ ] Data persists across container restarts
 - [ ] No performance issues; grid responsive
-- [ ] E2E tests automated: 5+ critical workflows passing
-  - [ ] Load dashboard and display grid
-  - [ ] Paginate through results
-  - [ ] Filter by charge type
-  - [ ] Create new charge
-  - [ ] Edit inline cell
-- [ ] E2E tests run across Chrome, Firefox, WebKit (Playwright)
-- [ ] E2E test reports generated; CI/CD integration ready
+- [x] E2E tests automated: 5+ critical workflows passing
+  - [x] Load dashboard and display grid
+  - [x] Paginate through results
+  - [x] Filter by charge type
+  - [x] Create new charge
+  - [x] Edit inline cell
+- [x] E2E tests run across Chrome, Firefox, WebKit (Playwright)
+- [x] E2E test reports generated; CI/CD integration ready
 
 **Go/No-Go**: MUST pass; this is MVP readiness
 
@@ -170,7 +170,7 @@
 | Phase 2 | 11 | 11 | 100% | ✅ Complete |
 | Phase 3 | 10 | 10 | 100% | ✅ Complete |
 | Phase 4 | 7 | 7 | 100% | ✅ Complete |
-| Phase 5 | 7 | 0 | 0% | 🔴 Waiting on Phase 3+ |
+| Phase 5 | 7 | 3 | 43% | 🟨 In Progress |
 | **TOTAL** | **41** | **0** | **0%** | — |
 
 ### Critical Path

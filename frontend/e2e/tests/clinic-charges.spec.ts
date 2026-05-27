@@ -22,13 +22,16 @@ test.describe('Clinic Charges Dashboard', () => {
     const grid = new GridHelper(page);
     await grid.waitForGridReady();
 
-    const firstPageId = await grid.getCellValue(0, 'id');
+    const firstPageId = await grid.getFirstVisibleCellValue('id');
 
-    const nextBtn = page.locator('button[aria-label="Next Page"]');
+    // AG Grid paging buttons: first, prev, next, last — next is index 2
+    const nextBtn = page.locator('.ag-paging-button').nth(2);
+    await nextBtn.waitFor({ state: 'visible', timeout: 10000 });
     await nextBtn.click();
     await page.waitForLoadState('networkidle');
+    await grid.waitForGridReady();
 
-    const secondPageId = await grid.getCellValue(0, 'id');
+    const secondPageId = await grid.getFirstVisibleCellValue('id');
     expect(firstPageId).not.toBe(secondPageId);
   });
 
@@ -45,8 +48,10 @@ test.describe('Clinic Charges Dashboard', () => {
 
     const rowCount = await grid.getRowCount();
     if (rowCount > 0) {
-      const cellVal = await grid.getCellValue(0, 'charge_type');
-      expect(cellVal).toContain('Consultation');
+      // Use expect with built-in retry to handle AG Grid async DOM updates
+      await expect(
+        page.locator('.ag-row[row-index="0"] .ag-cell[col-id="charge_type"]')
+      ).toContainText('Consultation', { timeout: 8000 });
     }
   });
 
