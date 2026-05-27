@@ -1,5 +1,7 @@
 ## 27-05-2026
 
+- Manual E2E flow verified: load (523 rows, 10/page) → paginate (page 2 IDs differ) → filter (Consultation-only) → create (POST returns new ID) → edit (PATCH updates amount) → DB state confirmed via PATCH response
+
 - E2E test suite: 36 tests passing across Chromium, Firefox, WebKit (Playwright)
   - `clinic-charges.spec.ts`: load, 10-row default, pagination, filter by charge type, clear filters, Add New Charge button
   - `editing.spec.ts`: PATCH amount and charge_type via API, verify grid reflects update after reload
