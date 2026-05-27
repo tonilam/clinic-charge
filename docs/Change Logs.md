@@ -1,5 +1,7 @@
 ## 27-05-2026
 
+- Database persistence verified: `docker compose down` (no -v) → `docker compose up --build` → 525 records intact; named volume `postgres_data` survives container restarts
+
 - Cross-browser E2E: 36 tests passing across Chromium (12), Firefox (12), WebKit (12); no layout issues observed
 
 - Performance check: pagination API ~12ms, 500-row fetch ~43ms; Chromium E2E suite 12 tests in 3.6s — all under 1s per-test target; grid renders 524 rows smoothly via AG Grid InfiniteRowModel
