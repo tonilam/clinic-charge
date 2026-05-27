@@ -349,7 +349,7 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:15-alpine
+    image: postgres:18-alpine
     environment:
       POSTGRES_USER: clinic_admin
       POSTGRES_PASSWORD: secure_password_change_me
@@ -392,7 +392,7 @@ BREACH_NOTIFICATION_ENABLED=true
 # Docker Compose - Australia-based hosting
 services:
   postgres:
-    image: postgres:15-alpine
+    image: postgres:18-alpine
     # MUST be deployed in Australian region:
     # - AWS: ap-southeast-2 (Sydney)
     # - Azure: australiaeast or australiasoutheast
