@@ -1,5 +1,7 @@
 ## 27-05-2026
 
+- Performance check: pagination API ~12ms, 500-row fetch ~43ms; Chromium E2E suite 12 tests in 3.6s — all under 1s per-test target; grid renders 524 rows smoothly via AG Grid InfiniteRowModel
+
 - Manual E2E flow verified: load (523 rows, 10/page) → paginate (page 2 IDs differ) → filter (Consultation-only) → create (POST returns new ID) → edit (PATCH updates amount) → DB state confirmed via PATCH response
 
 - E2E test suite: 36 tests passing across Chromium, Firefox, WebKit (Playwright)
