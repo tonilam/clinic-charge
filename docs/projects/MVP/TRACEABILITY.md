@@ -125,7 +125,7 @@
 ## Phase 5: Integration & Docker Validation 🐳
 
 **Status**: 🟨 In Progress  
-**Completion**: 5 / 7
+**Completion**: 6 / 7
 **Priority**: CRITICAL - Ship Gate
 
 | # | Task | Effort | Status | Commit Ref | Dependencies | Notes |
@@ -135,7 +135,7 @@
 | 5.3 | Automated E2E tests with Playwright | L | ✅ | f53ecaf | 3.10, 2.11 | 36 tests across Chrome/Firefox/WebKit; API-based editing tests; all passing |
 | 5.4 | Manual end-to-end flow testing | M | ✅ | 8952c8d | 5.2 | Load frontend → request data → paginate → filter → create → edit → verified via API |
 | 5.5 | Performance check (responsiveness) | M | ✅ | 156be9c | 3.6, 2.4 | Pagination ~12ms, 500-row fetch ~43ms; Chromium E2E 12 tests in 3.6s |
-| 5.6 | Cross-browser testing (Chrome, Firefox, Safari) | M | ⬜ | | 5.3 | E2E tests run on 3 browsers via Playwright; no layout issues |
+| 5.6 | Cross-browser testing (Chrome, Firefox, Safari) | M | ✅ | 9139577 | 5.3 | 36 tests pass: 12 Chromium + 12 Firefox + 12 WebKit; no layout issues |
 | 5.7 | Database persistence verification | S | ⬜ | | 1.4 | `docker-compose down` (no -v), restart, data still there |
 
 **Acceptance Criteria:**
