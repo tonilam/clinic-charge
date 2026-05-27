@@ -32,12 +32,12 @@
 
 ## Phase 2: Backend Core 🐍
 
-**Status**: ⏳ Waiting on Phase 1  
+**Status**: 🟨 In Progress  
 **Completion**: 0 / 11
 
 | # | Task | Effort | Status | Commit Ref | Dependencies | Notes |
 |---|------|--------|--------|-----------|--------------|-------|
-| 2.1 | SQLAlchemy models & ORM setup | S | ⬜ | | 1.1, 1.4 | Charge model, relationships, timestamps |
+| 2.1 | SQLAlchemy models & ORM setup | S | ✅ | 53f4f1c | 1.1, 1.4 | Charge model, relationships, timestamps |
 | 2.2 | Pydantic schemas (request/response) | S | ⬜ | | 2.1 | ChargeCreate, ChargeUpdate, ChargeResponse |
 | 2.3 | Database connection & async pool | S | ⬜ | | 1.4, 2.1 | asyncpg, connection string from env |
 | 2.4 | GET /api/charges (paginated endpoint) | M | ⬜ | | 2.1, 2.2, 2.3 | LIMIT/OFFSET, startRow/endRow params |
