@@ -14,7 +14,7 @@
 | # | Task | Effort | Status | Commit Ref | Notes |
 |---|------|--------|--------|-----------|-------|
 | 1.1 | PostgreSQL schema design | S | ✅ | 636204f | Create init.sql with [[Database.md]] schema |
-| 1.2 | Backend project structure (FastAPI) | S | ⬜ | | app/, models.py, schemas.py, main.py |
+| 1.2 | Backend project structure (FastAPI) | S | ✅ | 7f4e6de | app/, models.py, schemas.py, main.py |
 | 1.3 | Frontend project structure (Angular 20) | S | ⬜ | | Angular CLI, AG-Grid, Tailwind setup |
 | 1.4 | Docker setup (docker-compose.yml) | M | ⬜ | | Three containers: postgres, backend, frontend |
 | 1.5 | Environment variables & config | XS | ⬜ | | .env.local, connection strings |
