@@ -1,5 +1,8 @@
 ## 27-05-2026
 
+- Updated `backend/requirements.txt` to Python 3.14-compatible versions (pydantic 2.13.4, fastapi 0.136.3); added `greenlet` dependency for SQLAlchemy async
+- Added `backend/.coveragerc` to exclude `seed.py` from coverage reporting; backend tests: 45 passed, 97% coverage
+
 - Added `backend/app/api/charges.py`: GET `/api/charges` with `startRow`/`endRow` pagination params
 - Added `backend/app/services/charge_service.py`: filtering by `charge_type` (exact) and `medical_centre_name` (ilike)
 - Added POST `/api/charges` returning 201 with created record

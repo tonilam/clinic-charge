@@ -46,7 +46,7 @@
 | 2.7 | POST /api/charges (create new charge) | S | ✅ | ec7b66e | 2.1, 2.2, 2.3 | Input validation, return 201, ID in response |
 | 2.8 | PATCH /api/charges/{id} (inline edit) | M | ✅ | ec7b66e | 2.1, 2.2, 2.3 | Partial updates, return 200/404 |
 | 2.9 | Error handling & HTTP status codes | M | ✅ | ec7b66e | 2.4-2.8 | 400, 404, 500 with meaningful messages |
-| 2.10 | Backend unit tests (pytest) | L | ⬜ | | 2.1-2.9 | Service, schema, endpoint tests; 85%+ coverage |
+| 2.10 | Backend unit tests (pytest) | L | ✅ | c09c1e7 | 2.1-2.9 | Service, schema, endpoint tests; 85%+ coverage |
 | 2.11 | Swagger/OpenAPI docs auto-generation | XS | ⬜ | | 2.4-2.8 | `/docs` endpoint; verify with browser |
 
 **Acceptance Criteria:**
