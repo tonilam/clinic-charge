@@ -1,5 +1,7 @@
 ## 27-05-2026
 
+- Updated `.gitignore` to exclude node_modules, __pycache__, .env, .venv, dist, .angular cache, and IDE files
+
 - Added `docker-compose.yml` with three services (postgres, backend, frontend), shared network, postgres healthcheck, and named volume for persistence
 - Added `.env.example` with database, backend, and CORS configuration
 
