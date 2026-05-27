@@ -17,7 +17,7 @@
 | 1.2 | Backend project structure (FastAPI) | S | ✅ | 7f4e6de | app/, models.py, schemas.py, main.py |
 | 1.3 | Frontend project structure (Angular 20) | S | ✅ | 0412406 | Angular CLI, AG-Grid, Tailwind setup |
 | 1.4 | Docker setup (docker-compose.yml) | M | ✅ | 3fc58b9 | Three containers: postgres, backend, frontend |
-| 1.5 | Environment variables & config | XS | ⬜ | | .env.local, connection strings |
+| 1.5 | Environment variables & config | XS | ✅ | 729d1e7 | .env.local, connection strings |
 | 1.6 | Git repo & .gitignore | XS | ⬜ | | Exclude node_modules, __pycache__, .env |
 
 **Acceptance Criteria:**
