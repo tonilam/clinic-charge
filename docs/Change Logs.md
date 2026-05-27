@@ -1,5 +1,8 @@
 ## 27-05-2026
 
+- Added `frontend/src/app/features/clinic-charges/components/grid/grid.component.spec.ts` and `pages/dashboard/dashboard.component.spec.ts`; frontend tests: 42 passed, 91.88% coverage
+- Installed `@vitest/coverage-v8` devDependency for frontend coverage reporting
+
 - Updated `backend/requirements.txt` to Python 3.14-compatible versions (pydantic 2.13.4, fastapi 0.136.3); added `greenlet` dependency for SQLAlchemy async
 - Added `backend/.coveragerc` to exclude `seed.py` from coverage reporting; backend tests: 45 passed, 97% coverage
 

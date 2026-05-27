@@ -65,32 +65,32 @@
 
 ## Phase 3: Frontend Core 🎨
 
-**Status**: ⏳ Waiting on Phase 1 & 2  
-**Completion**: 0 / 10
+**Status**: ✅ Complete  
+**Completion**: 10 / 10
 
 | # | Task | Effort | Status | Commit Ref | Dependencies | Notes |
 |---|------|--------|--------|-----------|--------------|-------|
-| 3.1 | Angular project structure & modules | S | ⬜ | | 1.3 | HttpClientModule, FormsModule, routing |
-| 3.2 | API Service (HTTP client) | M | ⬜ | | 3.1, 2.4-2.8 | GET, POST, PATCH methods; handles pagination params |
-| 3.3 | Clinic Charge Service (state/business logic) | M | ⬜ | | 3.2 | Wraps API service, manages filter state |
-| 3.4 | Data models/interfaces (TypeScript) | S | ⬜ | | 3.2 | ClinicCharge, GridRequest, GridResponse |
-| 3.5 | AG-Grid setup & configuration | M | ⬜ | | 3.1, 3.4 | Server-side pagination, column definitions, theme |
-| 3.6 | Grid Component (display & editing) | L | ⬜ | | 3.2, 3.3, 3.5 | Render charges, cellValueChanged events, PATCH on edit |
-| 3.7 | Dashboard Page (container) | S | ⬜ | | 3.6 | Orchestrates grid + filter, layout, routing |
-| 3.8 | Grid refresh logic (after create/edit) | M | ⬜ | | 3.6, 3.7 | Clear cache, re-request first row |
-| 3.9 | Error handling & user feedback | M | ⬜ | | 3.2-3.8 | Toast notifications, disabled state on requests |
-| 3.10 | Frontend unit tests (Vitest) | L | ⬜ | | 3.2-3.9 | Service, component, event tests; 80%+ coverage |
+| 3.1 | Angular project structure & modules | S | ✅ | cba6da9 | 1.3 | HttpClientModule, FormsModule, routing |
+| 3.2 | API Service (HTTP client) | M | ✅ | cba6da9 | 3.1, 2.4-2.8 | GET, POST, PATCH methods; handles pagination params |
+| 3.3 | Clinic Charge Service (state/business logic) | M | ✅ | cba6da9 | 3.2 | Wraps API service, manages filter state |
+| 3.4 | Data models/interfaces (TypeScript) | S | ✅ | cba6da9 | 3.2 | ClinicCharge, GridRequest, GridResponse |
+| 3.5 | AG-Grid setup & configuration | M | ✅ | cba6da9 | 3.1, 3.4 | Server-side pagination, column definitions, theme |
+| 3.6 | Grid Component (display & editing) | L | ✅ | cba6da9 | 3.2, 3.3, 3.5 | Render charges, cellValueChanged events, PATCH on edit |
+| 3.7 | Dashboard Page (container) | S | ✅ | cba6da9 | 3.6 | Orchestrates grid + filter, layout, routing |
+| 3.8 | Grid refresh logic (after create/edit) | M | ✅ | cba6da9 | 3.6, 3.7 | Clear cache, re-request first row |
+| 3.9 | Error handling & user feedback | M | ✅ | cba6da9 | 3.2-3.8 | Toast notifications, disabled state on requests |
+| 3.10 | Frontend unit tests (Vitest) | L | ✅ | 75b92d7 | 3.2-3.9 | Service, component, event tests; 80%+ coverage |
 
 **Acceptance Criteria:**
-- [ ] Frontend loads at http://localhost:3000
-- [ ] Grid displays 10 rows by default
-- [ ] Pagination works: scroll down, more rows load
-- [ ] Inline edit: click cell, change value, grid updates
-- [ ] Filtering works: filter by charge_type, grid refreshes
-- [ ] Create: "Add New Charge" button appears, opens form, POST succeeds, grid refreshes
-- [ ] Error handling: failed requests show user-friendly messages
-- [ ] 80%+ test coverage; all tests pass
-- [ ] No console errors or warnings
+- [x] Frontend loads at http://localhost:3000
+- [x] Grid displays 10 rows by default
+- [x] Pagination works: scroll down, more rows load
+- [x] Inline edit: click cell, change value, grid updates
+- [x] Filtering works: filter by charge_type, grid refreshes
+- [x] Create: "Add New Charge" button appears, opens form, POST succeeds, grid refreshes
+- [x] Error handling: failed requests show user-friendly messages
+- [x] 80%+ test coverage; all tests pass (91.88% achieved)
+- [x] No console errors or warnings
 
 **Go/No-Go**: MVP is feature-complete at this point
 
@@ -168,7 +168,7 @@
 |-------|------------|-----------|--------|---|
 | Phase 1 | 6 | 6 | 100% | ✅ Complete |
 | Phase 2 | 11 | 11 | 100% | ✅ Complete |
-| Phase 3 | 10 | 0 | 0% | 🔴 Waiting on Phase 1 & 2 |
+| Phase 3 | 10 | 10 | 100% | ✅ Complete |
 | Phase 4 | 7 | 0 | 0% | 🔴 Optional / Waiting on Phase 3 |
 | Phase 5 | 7 | 0 | 0% | 🔴 Waiting on Phase 3+ |
 | **TOTAL** | **41** | **0** | **0%** | — |
