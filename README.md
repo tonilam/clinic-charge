@@ -13,6 +13,8 @@ A SaaS application to store GP clinic consultation charges
 
 ## Tools
 
-| Tool | Purpose |
-|------|---------|
-| Obsidian | Visual tool to read `.md` documentation |
+| Tool        | Purpose                                         |
+| ----------- | ----------------------------------------------- |
+| Claude Code | Agentic coding                                  |
+| Obsidian    | Visual tool to read `.md` documentation         |
+| Claudian    | An Obsidian plug-in for agentic document writer |
