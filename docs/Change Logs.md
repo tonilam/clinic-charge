@@ -1,5 +1,10 @@
 ## 27-05-2026
 
+- Verified Tailwind CSS applied throughout dashboard, grid, filter, and modal; `ag-theme-quartz` applied to grid
+- Verified loading spinner signal in `grid.component.ts`; form validation (`amount > 0`, required fields) in both Pydantic schemas and Angular dashboard
+- Verified consistent `{"detail": "..."}` error JSON from backend; edge case tests for empty results and pagination boundaries in backend integration tests
+- Added `CLAUDE.md` with project commands, architecture, and development guide
+
 - Added `frontend/src/app/features/clinic-charges/components/grid/grid.component.spec.ts` and `pages/dashboard/dashboard.component.spec.ts`; frontend tests: 42 passed, 91.88% coverage
 - Installed `@vitest/coverage-v8` devDependency for frontend coverage reporting
 
