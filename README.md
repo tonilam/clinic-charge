@@ -11,6 +11,28 @@ A SaaS application to store GP clinic consultation charges
 | Database | PostgreSQL / MySQL |
 | DevOps | Docker |
 
+## Minimum System Requirements
+
+### Local Machine
+- **Docker Desktop** (or Docker Engine + Docker Compose v2+)
+  - macOS/Windows: [Download Docker Desktop](https://www.docker.com/products/docker-desktop)
+  - Linux: Install via package manager (`apt-get install docker.io docker-compose`)
+- **Git** (to clone the repository)
+- **Text Editor/IDE** (VS Code, IntelliJ, etc.)
+
+### Hardware & Resources
+- **RAM**: 2GB minimum allocated to Docker (4GB+ recommended)
+- **Disk Space**: 10GB+ free space
+- **CPU**: 2+ cores
+
+### Supported Platforms
+- ✅ macOS (Intel & Apple Silicon)
+- ✅ Windows (with WSL 2)
+- ✅ Linux (Ubuntu, Debian, etc.)
+
+### No Additional Setup Required
+Once Docker is installed, everything else (Python 3.10+, Node.js, PostgreSQL) runs inside containers — no need to install them locally.
+
 ## Docker Setup
 
 To run the application locally with all services (frontend, backend, database):
