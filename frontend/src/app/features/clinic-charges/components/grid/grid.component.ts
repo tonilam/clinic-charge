@@ -10,12 +10,19 @@ import {
   IGetRowsParams,
   ModuleRegistry,
   InfiniteRowModelModule,
+  NumberEditorModule,
   PaginationModule,
+  TextEditorModule,
 } from 'ag-grid-community';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
 import { ClinicCharge } from '../../../../shared/models/clinic-charge.model';
 
-ModuleRegistry.registerModules([InfiniteRowModelModule, PaginationModule]);
+ModuleRegistry.registerModules([
+  InfiniteRowModelModule,
+  PaginationModule,
+  TextEditorModule,
+  NumberEditorModule,
+]);
 
 @Component({
   selector: 'app-grid',
