@@ -1,9 +1,16 @@
 ## 28-05-2026
 
+- AG Grid: registered `TextEditorModule` and `NumberEditorModule` so inline cell editing works (fixes error #200 in unit tests); Vitest coverage excludes `**/*.html`; Angular CLI analytics disabled
+
 - Create charge modal: charge type field uses `CHARGE_TYPES` dropdown instead of free text; E2E create flow updated for select
+
+- Create charge modal: reject amounts with more than 2 decimal places via `hasAtMostTwoDecimalPlaces()` helper; unit test added
+
+- AG Grid theme: moved `ag-grid.css` and `ag-theme-quartz.css` from `styles.css` `@import` into `angular.json` `styles` array so the quartz theme loads correctly; default grid page size increased from 10 to 20
 
 - Frontend refactor per implement skill (MVC + DRY): moved inline templates to `.html` for dashboard, grid, filter, app root, and new create-charge modal
 - Extracted `CreateChargeModalComponent`; dashboard now orchestrates filter, grid, and modal only
+- Added `.claude/skills/implement/` skill with MVC and DRY rules; updated `docs/idea/Frontend.md`
 - Shared `EMPTY_FILTER_STATE`, `createEmptyCharge()`, `CHARGE_TYPES`, form CSS class constants, and `shared/testing/clinic-charge.testing.ts` fixtures
 - `ClinicChargeService`: added `applyFilters()` and `clearFilters()` to consolidate filter + refresh logic
 - Frontend unit tests: 47 passed (create-charge modal spec added; dashboard/grid specs use shared mocks)
