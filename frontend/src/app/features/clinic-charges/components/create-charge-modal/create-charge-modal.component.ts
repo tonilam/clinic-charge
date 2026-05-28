@@ -3,7 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
 import { ChargeCreate } from '../../../../shared/models/clinic-charge.model';
-import { FORM_INPUT_CLASS } from '../../../../shared/constants/form-classes';
+import { CHARGE_TYPES } from '../../../../shared/constants/charge-types';
+import {
+  FORM_INPUT_CLASS,
+  FORM_SELECT_CLASS,
+} from '../../../../shared/constants/form-classes';
 import {
   createEmptyCharge,
   hasAtMostTwoDecimalPlaces,
@@ -22,6 +26,8 @@ export class CreateChargeModalComponent {
   private chargeService = inject(ClinicChargeService);
 
   readonly formInputClass = FORM_INPUT_CLASS;
+  readonly formSelectClass = FORM_SELECT_CLASS;
+  readonly chargeTypes = CHARGE_TYPES;
 
   creating = signal(false);
   createError = signal('');

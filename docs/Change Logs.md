@@ -1,5 +1,7 @@
 ## 28-05-2026
 
+- Create charge modal: charge type field uses `CHARGE_TYPES` dropdown instead of free text; E2E create flow updated for select
+
 - Frontend refactor per implement skill (MVC + DRY): moved inline templates to `.html` for dashboard, grid, filter, app root, and new create-charge modal
 - Extracted `CreateChargeModalComponent`; dashboard now orchestrates filter, grid, and modal only
 - Shared `EMPTY_FILTER_STATE`, `createEmptyCharge()`, `CHARGE_TYPES`, form CSS class constants, and `shared/testing/clinic-charge.testing.ts` fixtures

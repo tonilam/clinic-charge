@@ -30,7 +30,7 @@ test.describe('Create Charge', () => {
     await page.locator('button:has-text("Add New Charge")').click();
     await page.locator('input[placeholder*="City Medical"]').fill('Test Clinic E2E');
     await page.locator('input[placeholder*="Standard Consultation"]').fill('Private Patient');
-    await page.locator('input[placeholder="e.g. Consultation"]').fill('Procedure');
+    await page.locator('select').selectOption('Procedure');
     await page.locator('input[type="number"]').fill('199.99');
 
     await page.locator('button:has-text("Create")').click();

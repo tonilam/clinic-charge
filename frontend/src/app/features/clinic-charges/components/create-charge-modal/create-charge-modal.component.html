@@ -25,12 +25,10 @@
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Charge Type *</label>
-        <input
-          type="text"
-          [(ngModel)]="newCharge.charge_type"
-          [class]="formInputClass"
-          placeholder="e.g. Consultation"
-        />
+        <select [(ngModel)]="newCharge.charge_type" [class]="formSelectClass + ' w-full'">
+          <option value="" disabled>Select charge type</option>
+          <option *ngFor="let t of chargeTypes" [value]="t">{{ t }}</option>
+        </select>
       </div>
 
       <div>
