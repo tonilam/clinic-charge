@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
 import { vi } from 'vitest';
+import { themeQuartz } from 'ag-grid-community';
 import { GridComponent } from './grid.component';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
 import { GridResponse } from '../../../../shared/models/clinic-charge.model';
@@ -46,6 +47,10 @@ describe('GridComponent', () => {
 
   it('should show a header tooltip hinting that columns can be reordered', () => {
     expect(component.defaultColDef.headerTooltip).toMatch(/drag/i);
+  });
+
+  it('should use the AG Grid v33 quartz theme via the Theming API', () => {
+    expect(component.theme).toBe(themeQuartz);
   });
 
   it('should define column definitions including editable fields', () => {

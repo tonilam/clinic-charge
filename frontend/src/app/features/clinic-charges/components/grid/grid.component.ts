@@ -15,6 +15,7 @@ import {
   TextEditorModule,
   TooltipModule,
   _ColumnMoveModule,
+  themeQuartz,
 } from 'ag-grid-community';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
 import { ClinicCharge } from '../../../../shared/models/clinic-charge.model';
@@ -39,6 +40,8 @@ ModuleRegistry.registerModules([
 export class GridComponent implements OnDestroy {
   private chargeService = inject(ClinicChargeService);
   private gridApi: GridApi | null = null;
+
+  readonly theme = themeQuartz;
 
   loading = signal(false);
   errorMessage = signal('');

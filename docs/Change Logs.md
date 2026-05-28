@@ -1,5 +1,8 @@
 ## 28-05-2026
 
+- AG Grid v33 Theming API: dropped legacy `ag-grid.css` / `ag-theme-quartz.css` from `angular.json` and `ag-theme-quartz` wrapper class; grid binds `themeQuartz` via `[theme]` (resolves console error #239 mixed-theming warning)
+- AG Grid header tooltips: `enableBrowserTooltips` and `tooltipShowDelay` on grid so drag-to-reorder hint shows on column header hover; unit test asserts `themeQuartz` binding
+
 - E2E tests aligned with 20-row default page size: `clinic-charges.spec.ts` expects 20 visible rows on load and after clearing filters (was 10)
 - E2E create flow: `create-charge.spec.ts` scopes form fills to `app-create-charge-modal` so grid inputs are not targeted
 - AG Grid column reorder UX: registered `TooltipModule` and `_ColumnMoveModule`; `defaultColDef.headerTooltip` hints drag-to-reorder; unit test added in `grid.component.spec.ts`
