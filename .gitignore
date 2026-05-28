@@ -27,6 +27,8 @@ frontend/dist/
 frontend/.angular/
 frontend/coverage/
 frontend/test-results/
+frontend/e2e/test-results/html/data/
+frontend/e2e/test-results/html/trace/
 
 # IDE
 .vscode/

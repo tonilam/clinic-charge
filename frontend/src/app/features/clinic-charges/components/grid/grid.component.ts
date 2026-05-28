@@ -13,15 +13,21 @@ import {
   NumberEditorModule,
   PaginationModule,
   TextEditorModule,
+  TooltipModule,
+  _ColumnMoveModule,
 } from 'ag-grid-community';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
 import { ClinicCharge } from '../../../../shared/models/clinic-charge.model';
+
+const COLUMN_REORDER_HEADER_TOOLTIP = 'Drag the column header to reorder columns';
 
 ModuleRegistry.registerModules([
   InfiniteRowModelModule,
   PaginationModule,
   TextEditorModule,
   NumberEditorModule,
+  TooltipModule,
+  _ColumnMoveModule,
 ]);
 
 @Component({
@@ -64,6 +70,7 @@ export class GridComponent implements OnDestroy {
   defaultColDef: ColDef = {
     sortable: false,
     resizable: true,
+    headerTooltip: COLUMN_REORDER_HEADER_TOOLTIP,
   };
 
   datasource: IDatasource = {

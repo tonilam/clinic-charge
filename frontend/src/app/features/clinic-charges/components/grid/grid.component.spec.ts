@@ -44,6 +44,10 @@ describe('GridComponent', () => {
     expect(component.errorMessage()).toBe('');
   });
 
+  it('should show a header tooltip hinting that columns can be reordered', () => {
+    expect(component.defaultColDef.headerTooltip).toMatch(/drag/i);
+  });
+
   it('should define column definitions including editable fields', () => {
     const editableFields = component.columnDefs
       .filter((c) => c.editable)

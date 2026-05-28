@@ -10,11 +10,11 @@ test.describe('Clinic Charges Dashboard', () => {
     expect(await grid.getRowCount()).toBeGreaterThan(0);
   });
 
-  test('should display 10 rows by default', async ({ page }) => {
+  test('should display 20 rows by default', async ({ page }) => {
     await page.goto('/');
     const grid = new GridHelper(page);
     await grid.waitForGridReady();
-    expect(await grid.getRowCount()).toBe(10);
+    expect(await grid.getRowCount()).toBe(20);
   });
 
   test('should paginate through results', async ({ page }) => {
@@ -68,7 +68,7 @@ test.describe('Clinic Charges Dashboard', () => {
     await page.waitForLoadState('networkidle');
     await grid.waitForGridReady();
 
-    expect(await grid.getRowCount()).toBe(10);
+    expect(await grid.getRowCount()).toBe(20);
   });
 
   test('should show Add New Charge button', async ({ page }) => {

@@ -28,10 +28,11 @@ test.describe('Create Charge', () => {
     await grid.waitForGridReady();
 
     await page.locator('button:has-text("Add New Charge")').click();
-    await page.locator('input[placeholder*="City Medical"]').fill('Test Clinic E2E');
-    await page.locator('input[placeholder*="Standard Consultation"]').fill('Private Patient');
-    await page.locator('select').selectOption('Procedure');
-    await page.locator('input[type="number"]').fill('199.99');
+    const modal = page.locator('app-create-charge-modal');
+    await modal.locator('input[placeholder*="City Medical"]').fill('Test Clinic E2E');
+    await modal.locator('input[placeholder*="Standard Consultation"]').fill('Private Patient');
+    await modal.locator('select').selectOption('Procedure');
+    await modal.locator('input[type="number"]').fill('199.99');
 
     await page.locator('button:has-text("Create")').click();
     await page.waitForLoadState('networkidle');

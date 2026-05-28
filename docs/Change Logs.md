@@ -1,5 +1,11 @@
 ## 28-05-2026
 
+- E2E tests aligned with 20-row default page size: `clinic-charges.spec.ts` expects 20 visible rows on load and after clearing filters (was 10)
+- E2E create flow: `create-charge.spec.ts` scopes form fills to `app-create-charge-modal` so grid inputs are not targeted
+- AG Grid column reorder UX: registered `TooltipModule` and `_ColumnMoveModule`; `defaultColDef.headerTooltip` hints drag-to-reorder; unit test added in `grid.component.spec.ts`
+- `.gitignore`: exclude Playwright HTML report artifacts under `frontend/e2e/test-results/html/data/` and `trace/`
+- E2E suite re-run: 36 tests passing across Chromium, Firefox, WebKit; junit/results/html report updated
+
 - AG Grid: registered `TextEditorModule` and `NumberEditorModule` so inline cell editing works (fixes error #200 in unit tests); Vitest coverage excludes `**/*.html`; Angular CLI analytics disabled
 
 - Create charge modal: charge type field uses `CHARGE_TYPES` dropdown instead of free text; E2E create flow updated for select
