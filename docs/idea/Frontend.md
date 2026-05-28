@@ -159,3 +159,5 @@ Different environment files manage API endpoints:
 4. **Error Handling**: HTTP interceptors and error callbacks provide feedback on failed operations
 5. **Performance**: AG Grid caching and debouncing minimize unnecessary requests
 6. **Separation of Concerns**: Services handle data, components handle presentation
+7. **MVC**: Component templates live in `.html` files
+8. **DRY**: shared models, constants, and helpers avoid duplicating logic across features

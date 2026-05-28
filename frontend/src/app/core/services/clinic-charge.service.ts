@@ -5,13 +5,14 @@ import {
   ClinicCharge,
   ChargeCreate,
   ChargeUpdate,
+  EMPTY_FILTER_STATE,
   FilterState,
   GridResponse,
 } from '../../shared/models/clinic-charge.model';
 
 @Injectable({ providedIn: 'root' })
 export class ClinicChargeService {
-  private filters = signal<FilterState>({ chargeType: '', medicalCentreName: '' });
+  private filters = signal<FilterState>({ ...EMPTY_FILTER_STATE });
   private refreshTrigger = signal<number>(0);
 
   constructor(private api: ApiService) {}
@@ -34,6 +35,15 @@ export class ClinicChargeService {
 
   setFilters(filters: FilterState): void {
     this.filters.set(filters);
+  }
+
+  applyFilters(filters: FilterState): void {
+    this.setFilters(filters);
+    this.triggerRefresh();
+  }
+
+  clearFilters(): void {
+    this.applyFilters(EMPTY_FILTER_STATE);
   }
 
   getFilters(): FilterState {

@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  effect,
-  inject,
-  signal,
-} from '@angular/core';
+import { Component, OnDestroy, effect, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AgGridAngular } from 'ag-grid-angular';
 import {
@@ -28,32 +21,9 @@ ModuleRegistry.registerModules([InfiniteRowModelModule, PaginationModule]);
   selector: 'app-grid',
   standalone: true,
   imports: [CommonModule, AgGridAngular],
-  template: `
-    <div class="relative w-full" style="height: 600px;">
-      <div
-        *ngIf="loading()"
-        class="absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center z-10"
-      >
-        <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-      </div>
-      <ag-grid-angular
-        class="ag-theme-quartz w-full h-full"
-        [columnDefs]="columnDefs"
-        [defaultColDef]="defaultColDef"
-        [rowModelType]="'infinite'"
-        [datasource]="datasource"
-        [pagination]="true"
-        [paginationPageSize]="10"
-        [cacheBlockSize]="10"
-        (gridReady)="onGridReady($event)"
-        (cellValueChanged)="onCellValueChanged($event)"
-      />
-    </div>
-
-    <p *ngIf="errorMessage()" class="mt-2 text-sm text-red-600">{{ errorMessage() }}</p>
-  `,
+  templateUrl: './grid.component.html',
 })
-export class GridComponent implements OnInit, OnDestroy {
+export class GridComponent implements OnDestroy {
   private chargeService = inject(ClinicChargeService);
   private gridApi: GridApi | null = null;
 
@@ -113,8 +83,6 @@ export class GridComponent implements OnInit, OnDestroy {
       this.refreshGrid();
     }
   });
-
-  ngOnInit(): void {}
 
   ngOnDestroy(): void {
     this.refreshEffect.destroy();

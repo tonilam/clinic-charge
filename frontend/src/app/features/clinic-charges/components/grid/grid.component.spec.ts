@@ -3,40 +3,24 @@ import { of, throwError } from 'rxjs';
 import { vi } from 'vitest';
 import { GridComponent } from './grid.component';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
-import { signal } from '@angular/core';
-import { GridResponse, ClinicCharge } from '../../../../shared/models/clinic-charge.model';
-
-const mockCharge: ClinicCharge = {
-  id: 1,
-  medical_centre_name: 'City Medical',
-  patient_visit_type: 'Standard',
-  charge_type: 'Consultation',
-  amount: 85,
-  created_at: '2026-01-01T00:00:00',
-  updated_at: '2026-01-01T00:00:00',
-};
-
-const mockResponse: GridResponse = { rows: [mockCharge], totalRecords: 1 };
-
-const refreshTrigger = signal(0);
-
-const mockChargeService = {
-  getCharges: vi.fn().mockReturnValue(of(mockResponse)),
-  updateCharge: vi.fn().mockReturnValue(of(mockCharge)),
-  getRefreshTrigger: vi.fn().mockReturnValue(refreshTrigger.asReadonly()),
-  triggerRefresh: vi.fn(),
-  setFilters: vi.fn(),
-};
+import { GridResponse } from '../../../../shared/models/clinic-charge.model';
+import {
+  createMockClinicChargeService,
+  mockClinicCharge,
+  mockGridResponse,
+  mockRefreshTrigger,
+} from '../../../../shared/testing/clinic-charge.testing';
 
 describe('GridComponent', () => {
   let component: GridComponent;
   let fixture: ComponentFixture<GridComponent>;
+  const mockChargeService = createMockClinicChargeService();
 
   beforeEach(async () => {
     vi.clearAllMocks();
-    mockChargeService.getCharges.mockReturnValue(of(mockResponse));
-    mockChargeService.updateCharge.mockReturnValue(of(mockCharge));
-    mockChargeService.getRefreshTrigger.mockReturnValue(refreshTrigger.asReadonly());
+    mockChargeService.getCharges.mockReturnValue(of(mockGridResponse));
+    mockChargeService.updateCharge.mockReturnValue(of(mockClinicCharge));
+    mockChargeService.getRefreshTrigger.mockReturnValue(mockRefreshTrigger.asReadonly());
 
     await TestBed.configureTestingModule({
       imports: [GridComponent],
@@ -73,7 +57,7 @@ describe('GridComponent', () => {
     const failCb = vi.fn();
     component.datasource.getRows({ startRow: 0, endRow: 10, successCallback: successCb, failCallback: failCb } as any);
     expect(mockChargeService.getCharges).toHaveBeenCalledWith(0, 10);
-    expect(successCb).toHaveBeenCalledWith([mockCharge], 1);
+    expect(successCb).toHaveBeenCalledWith([mockClinicCharge], 1);
     expect(failCb).not.toHaveBeenCalled();
   });
 
@@ -87,11 +71,11 @@ describe('GridComponent', () => {
   });
 
   it('should set lastRow to -1 when more data exists beyond endRow', () => {
-    const bigResponse: GridResponse = { rows: [mockCharge], totalRecords: 500 };
+    const bigResponse: GridResponse = { rows: [mockClinicCharge], totalRecords: 500 };
     mockChargeService.getCharges.mockReturnValue(of(bigResponse));
     const successCb = vi.fn();
     component.datasource.getRows({ startRow: 0, endRow: 10, successCallback: successCb, failCallback: vi.fn() } as any);
-    expect(successCb).toHaveBeenCalledWith([mockCharge], -1);
+    expect(successCb).toHaveBeenCalledWith([mockClinicCharge], -1);
   });
 
   it('onCellValueChanged should call updateCharge with patched field', () => {

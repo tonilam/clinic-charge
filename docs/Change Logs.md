@@ -1,3 +1,11 @@
+## 28-05-2026
+
+- Frontend refactor per implement skill (MVC + DRY): moved inline templates to `.html` for dashboard, grid, filter, app root, and new create-charge modal
+- Extracted `CreateChargeModalComponent`; dashboard now orchestrates filter, grid, and modal only
+- Shared `EMPTY_FILTER_STATE`, `createEmptyCharge()`, `CHARGE_TYPES`, form CSS class constants, and `shared/testing/clinic-charge.testing.ts` fixtures
+- `ClinicChargeService`: added `applyFilters()` and `clearFilters()` to consolidate filter + refresh logic
+- Frontend unit tests: 47 passed (create-charge modal spec added; dashboard/grid specs use shared mocks)
+
 ## 27-05-2026
 
 - Database persistence verified: `docker compose down` (no -v) → `docker compose up --build` → 525 records intact; named volume `postgres_data` survives container restarts
@@ -48,7 +56,5 @@
 - Added Angular 21 frontend project structure: standalone components, AG Grid, Tailwind CSS, Vitest, Playwright E2E configured
 
 - Added FastAPI backend project structure: `app/`, `main.py`, `models.py`, `schemas.py`, `config.py`, `api/charges.py`, `services/charge_service.py`, `db/database.py`
-
-## 27-05-2026
 
 - Added `backend/app/db/init.sql`: PostgreSQL schema for `clinic_charges` table with indexes on `charge_type`, `medical_centre_name`, `created_at`; `updated_at` auto-update trigger; 500-row seed block

@@ -38,3 +38,8 @@ export interface FilterState {
   chargeType: string;
   medicalCentreName: string;
 }
+
+export const EMPTY_FILTER_STATE: FilterState = {
+  chargeType: '',
+  medicalCentreName: '',
+};

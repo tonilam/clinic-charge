@@ -3,7 +3,11 @@ import { of } from 'rxjs';
 import { vi } from 'vitest';
 import { ClinicChargeService } from './clinic-charge.service';
 import { ApiService } from './api.service';
-import { GridResponse, ClinicCharge } from '../../shared/models/clinic-charge.model';
+import {
+  EMPTY_FILTER_STATE,
+  GridResponse,
+  ClinicCharge,
+} from '../../shared/models/clinic-charge.model';
 
 const mockCharge: ClinicCharge = {
   id: 1,
@@ -66,7 +70,7 @@ describe('ClinicChargeService', () => {
   });
 
   it('should not pass empty filter strings', async () => {
-    service.setFilters({ chargeType: '', medicalCentreName: '' });
+    service.setFilters(EMPTY_FILTER_STATE);
     await new Promise<void>((resolve) => {
       service.getCharges(0, 10).subscribe(() => resolve());
     });
@@ -107,5 +111,23 @@ describe('ClinicChargeService', () => {
     const filters = service.getFilters();
     expect(filters.chargeType).toBe('Emergency');
     expect(filters.medicalCentreName).toBe('North');
+  });
+
+  it('applyFilters should set filters and increment refresh trigger', () => {
+    const before = service.getRefreshTrigger()();
+    service.applyFilters({ chargeType: 'Consultation', medicalCentreName: 'City' });
+    expect(service.getFilters()).toEqual({
+      chargeType: 'Consultation',
+      medicalCentreName: 'City',
+    });
+    expect(service.getRefreshTrigger()()).toBe(before + 1);
+  });
+
+  it('clearFilters should reset filters and increment refresh trigger', () => {
+    service.setFilters({ chargeType: 'Emergency', medicalCentreName: 'North' });
+    const before = service.getRefreshTrigger()();
+    service.clearFilters();
+    expect(service.getFilters()).toEqual(EMPTY_FILTER_STATE);
+    expect(service.getRefreshTrigger()()).toBe(before + 1);
   });
 });

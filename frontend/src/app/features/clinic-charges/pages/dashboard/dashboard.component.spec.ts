@@ -1,41 +1,16 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of, throwError } from 'rxjs';
 import { vi } from 'vitest';
 import { DashboardComponent } from './dashboard.component';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
-import { ClinicCharge } from '../../../../shared/models/clinic-charge.model';
-import { signal } from '@angular/core';
-
-const mockCharge: ClinicCharge = {
-  id: 1,
-  medical_centre_name: 'City Medical',
-  patient_visit_type: 'Standard',
-  charge_type: 'Consultation',
-  amount: 85,
-  created_at: '2026-01-01T00:00:00',
-  updated_at: '2026-01-01T00:00:00',
-};
-
-const refreshTrigger = signal(0);
-
-const mockChargeService = {
-  setFilters: vi.fn(),
-  triggerRefresh: vi.fn(),
-  createCharge: vi.fn().mockReturnValue(of(mockCharge)),
-  getCharges: vi.fn().mockReturnValue(of({ rows: [], totalRecords: 0 })),
-  updateCharge: vi.fn().mockReturnValue(of(mockCharge)),
-  getFilters: vi.fn().mockReturnValue({ chargeType: '', medicalCentreName: '' }),
-  getRefreshTrigger: vi.fn().mockReturnValue(refreshTrigger.asReadonly()),
-};
+import { createMockClinicChargeService } from '../../../../shared/testing/clinic-charge.testing';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let fixture: ComponentFixture<DashboardComponent>;
+  const mockChargeService = createMockClinicChargeService();
 
   beforeEach(async () => {
     vi.clearAllMocks();
-    mockChargeService.createCharge.mockReturnValue(of(mockCharge));
-    mockChargeService.getRefreshTrigger.mockReturnValue(refreshTrigger.asReadonly());
 
     await TestBed.configureTestingModule({
       imports: [DashboardComponent],
@@ -66,61 +41,21 @@ describe('DashboardComponent', () => {
     expect(component.showCreateForm()).toBe(false);
   });
 
-  it('onFilterApplied should call setFilters and triggerRefresh', () => {
+  it('onFilterApplied should call applyFilters', () => {
     const filters = { chargeType: 'Consultation', medicalCentreName: 'City' };
     component.onFilterApplied(filters);
-    expect(mockChargeService.setFilters).toHaveBeenCalledWith(filters);
-    expect(mockChargeService.triggerRefresh).toHaveBeenCalled();
+    expect(mockChargeService.applyFilters).toHaveBeenCalledWith(filters);
   });
 
-  it('onFilterCleared should reset filters and trigger refresh', () => {
+  it('onFilterCleared should call clearFilters', () => {
     component.onFilterCleared();
-    expect(mockChargeService.setFilters).toHaveBeenCalledWith({ chargeType: '', medicalCentreName: '' });
-    expect(mockChargeService.triggerRefresh).toHaveBeenCalled();
+    expect(mockChargeService.clearFilters).toHaveBeenCalled();
   });
 
-  it('submitCreate should show error when fields are empty', () => {
+  it('onChargeCreated should close form and trigger refresh', () => {
     component.openCreateForm();
-    component.newCharge = { medical_centre_name: '', patient_visit_type: '', charge_type: '', amount: 0 };
-    component.submitCreate();
-    expect(component.createError()).not.toBe('');
-    expect(mockChargeService.createCharge).not.toHaveBeenCalled();
-  });
-
-  it('submitCreate should show error when amount is zero', () => {
-    component.openCreateForm();
-    component.newCharge = { medical_centre_name: 'Clinic', patient_visit_type: 'Visit', charge_type: 'Consult', amount: 0 };
-    component.submitCreate();
-    expect(component.createError()).not.toBe('');
-  });
-
-  it('submitCreate should call createCharge with valid payload and close form on success', async () => {
-    component.openCreateForm();
-    component.newCharge = {
-      medical_centre_name: 'Clinic',
-      patient_visit_type: 'Standard',
-      charge_type: 'Consultation',
-      amount: 85,
-    };
-    component.submitCreate();
-    await fixture.whenStable();
-    expect(mockChargeService.createCharge).toHaveBeenCalled();
+    component.onChargeCreated();
     expect(component.showCreateForm()).toBe(false);
     expect(mockChargeService.triggerRefresh).toHaveBeenCalled();
-  });
-
-  it('submitCreate should show error message on API failure', async () => {
-    mockChargeService.createCharge.mockReturnValue(throwError(() => new Error('fail')));
-    component.openCreateForm();
-    component.newCharge = {
-      medical_centre_name: 'Clinic',
-      patient_visit_type: 'Standard',
-      charge_type: 'Consultation',
-      amount: 85,
-    };
-    component.submitCreate();
-    await fixture.whenStable();
-    expect(component.createError()).not.toBe('');
-    expect(component.showCreateForm()).toBe(true);
   });
 });
