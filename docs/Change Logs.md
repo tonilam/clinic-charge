@@ -1,5 +1,9 @@
 ## 28-05-2026
 
+- Grid amount column: switched to `agNumberCellEditor` so non-numeric characters are blocked at input time; `valueSetter` decimal-places check remains for values that pass the editor
+
+
+
 - Backend validation: added `ChargeType` `Literal` type in `schemas.py` covering the 10 allowed charge types; `ChargeBase.charge_type` and `ChargeUpdate.charge_type` now reject invalid values with 422
 - Tests: updated integration tests to use valid charge type values; added `test_create_charge_invalid_charge_type_returns_422` and `test_invalid_charge_type_raises_error` unit test
 

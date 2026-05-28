@@ -79,6 +79,7 @@ export class GridComponent implements OnDestroy {
       headerName: 'Amount ($)',
       editable: true,
       flex: 1,
+      cellEditor: 'agNumberCellEditor',
       valueFormatter: (p) => (p.value != null ? `$${Number(p.value).toFixed(2)}` : ''),
       valueSetter: (params) => {
         if (!hasAtMostTwoDecimalPlaces(Number(params.newValue))) {
