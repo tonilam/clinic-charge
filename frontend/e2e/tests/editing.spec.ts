@@ -14,18 +14,15 @@ test.describe('Inline Cell Editing', () => {
     const grid = new GridHelper(page);
     await grid.waitForGridReady();
 
-    // Read the ID of the first row from the grid
     const idText = (await grid.getCellValue(0, 'id')).trim();
     const id = parseInt(idText, 10);
     expect(id).toBeGreaterThan(0);
 
-    // PATCH the charge via the backend API
     const patchRes = await request.patch(`${BACKEND_URL}/api/charges/${id}`, {
       data: { amount: 99.99 },
     });
     expect(patchRes.ok()).toBe(true);
 
-    // Reload the page and confirm the grid shows the updated amount
     await page.reload();
     await grid.waitForGridReady();
 
@@ -42,7 +39,6 @@ test.describe('Inline Cell Editing', () => {
     const id = parseInt(idText, 10);
     expect(id).toBeGreaterThan(0);
 
-    // PATCH charge_type via API
     const patchRes = await request.patch(`${BACKEND_URL}/api/charges/${id}`, {
       data: { charge_type: 'Emergency' },
     });

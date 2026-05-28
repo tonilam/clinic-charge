@@ -22,7 +22,6 @@ class TestChargeCreate:
                 medical_centre_name="City Medical",
                 patient_visit_type="Standard",
                 charge_type="Consultation",
-                # missing amount
             )
 
     def test_invalid_amount_type_raises_error(self):

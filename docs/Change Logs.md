@@ -1,5 +1,8 @@
 ## 28-05-2026
 
+- Cleanup: removed unused `frontend/src/app/app.css` and `frontend/e2e/utils/api-helper.ts`; removed tracked Playwright report artifacts under `frontend/e2e/test-results/`
+- Test code cleanup: removed redundant self-explanatory comments in `frontend/e2e/tests/editing.spec.ts` and `backend/tests/unit/test_schemas.py`
+
 - Frontend UX: added global toast notifications via new `ToastService` and standalone `ToastComponent`; dashboard now renders `<app-toast />` for centralized success/error/info feedback
 - Grid inline editing: replaced `errorMessage` UI with toast errors for load/update failures; failed updates now revert safely with guarded `isReverting` flow to prevent recursive cell-change handling
 - Charge type consistency: introduced `ChargeType` model typing from `CHARGE_TYPES`; updated `ClinicCharge`, `ChargeCreate`, and `ChargeUpdate` to use typed charge values
