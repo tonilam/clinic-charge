@@ -8,12 +8,13 @@ import {
   GridResponse,
   ClinicCharge,
 } from '../../shared/models/clinic-charge.model';
+import { CHARGE_TYPES } from '../../shared/constants/charge-types';
 
 const mockCharge: ClinicCharge = {
   id: 1,
   medical_centre_name: 'City Medical',
   patient_visit_type: 'Standard',
-  charge_type: 'Consultation',
+  charge_type: CHARGE_TYPES[0],
   amount: 85,
   created_at: '2026-01-01T00:00:00',
   updated_at: '2026-01-01T00:00:00',
@@ -85,7 +86,7 @@ describe('ClinicChargeService', () => {
       service.createCharge({
         medical_centre_name: 'Metro',
         patient_visit_type: 'Private',
-        charge_type: 'Surgery',
+        charge_type: CHARGE_TYPES[1],
         amount: 500,
       }).subscribe((res) => resolve(res));
     });

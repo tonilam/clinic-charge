@@ -5,11 +5,12 @@ import { FilterComponent } from '../../components/filter/filter.component';
 import { CreateChargeModalComponent } from '../../components/create-charge-modal/create-charge-modal.component';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
 import { FilterState } from '../../../../shared/models/clinic-charge.model';
+import { ToastComponent } from '../../../../shared/components/toast/toast.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, GridComponent, FilterComponent, CreateChargeModalComponent],
+  imports: [CommonModule, GridComponent, FilterComponent, CreateChargeModalComponent, ToastComponent],
   templateUrl: './dashboard.component.html',
 })
 export class DashboardComponent {

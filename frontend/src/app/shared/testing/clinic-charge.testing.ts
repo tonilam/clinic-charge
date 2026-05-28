@@ -6,12 +6,13 @@ import {
   EMPTY_FILTER_STATE,
   GridResponse,
 } from '../models/clinic-charge.model';
+import { CHARGE_TYPES } from '../constants/charge-types';
 
 export const mockClinicCharge: ClinicCharge = {
   id: 1,
   medical_centre_name: 'City Medical',
   patient_visit_type: 'Standard',
-  charge_type: 'Consultation',
+  charge_type: CHARGE_TYPES[0],
   amount: 85,
   created_at: '2026-01-01T00:00:00',
   updated_at: '2026-01-01T00:00:00',

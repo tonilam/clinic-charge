@@ -3,8 +3,10 @@ import { of, throwError } from 'rxjs';
 import { vi } from 'vitest';
 import { themeQuartz } from 'ag-grid-community';
 import { GridComponent } from './grid.component';
+import { CHARGE_TYPES } from '../../../../shared/constants/charge-types';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
-import { GridResponse } from '../../../../shared/models/clinic-charge.model';
+import { ToastService } from '../../../../core/services/toast.service';
+import { ClinicCharge, GridResponse } from '../../../../shared/models/clinic-charge.model';
 import {
   createMockClinicChargeService,
   mockClinicCharge,
@@ -16,6 +18,7 @@ describe('GridComponent', () => {
   let component: GridComponent;
   let fixture: ComponentFixture<GridComponent>;
   const mockChargeService = createMockClinicChargeService();
+  const mockToastService = { show: vi.fn(), dismiss: vi.fn() };
 
   beforeEach(async () => {
     vi.clearAllMocks();
@@ -25,7 +28,10 @@ describe('GridComponent', () => {
 
     await TestBed.configureTestingModule({
       imports: [GridComponent],
-      providers: [{ provide: ClinicChargeService, useValue: mockChargeService }],
+      providers: [
+        { provide: ClinicChargeService, useValue: mockChargeService },
+        { provide: ToastService, useValue: mockToastService },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GridComponent);
@@ -39,10 +45,6 @@ describe('GridComponent', () => {
 
   it('should initialise loading signal to false', () => {
     expect(component.loading()).toBe(false);
-  });
-
-  it('should initialise errorMessage signal to empty string', () => {
-    expect(component.errorMessage()).toBe('');
   });
 
   it('should show a header tooltip hinting that columns can be reordered', () => {
@@ -61,6 +63,49 @@ describe('GridComponent', () => {
     expect(editableFields).toContain('amount');
   });
 
+  it('charge_type column should use agSelectCellEditor with CHARGE_TYPES values', () => {
+    const chargeTypeCol = component.columnDefs.find((c) => c.field === 'charge_type');
+    expect(chargeTypeCol?.cellEditor).toBe('agSelectCellEditor');
+    expect((chargeTypeCol?.cellEditorParams as { values: readonly string[] })?.values).toEqual(CHARGE_TYPES);
+  });
+
+  describe('amount column valueSetter', () => {
+    let valueSetter: (params: { newValue: unknown; data: Partial<ClinicCharge> }) => boolean;
+
+    beforeEach(() => {
+      const amountCol = component.columnDefs.find((c) => c.field === 'amount');
+      valueSetter = amountCol!.valueSetter as typeof valueSetter;
+    });
+
+    it('should return false and show toast when decimal places > 2', () => {
+      const data: Partial<ClinicCharge> = { amount: 85 };
+      const result = valueSetter({ newValue: '23.0123', data });
+      expect(result).toBe(false);
+      expect(mockToastService.show).toHaveBeenCalledWith('Amount must have at most 2 decimal places.');
+      expect(data.amount).toBe(85);
+    });
+
+    it('should return false and not fire updateCharge when decimal places > 2', () => {
+      const data: Partial<ClinicCharge> = { amount: 85 };
+      valueSetter({ newValue: '23.0123', data });
+      expect(mockChargeService.updateCharge).not.toHaveBeenCalled();
+    });
+
+    it('should return true and update data when decimal places <= 2', () => {
+      const data: Partial<ClinicCharge> = { amount: 85 };
+      const result = valueSetter({ newValue: '23.12', data });
+      expect(result).toBe(true);
+      expect(data.amount).toBe(23.12);
+    });
+
+    it('should return true and update data for whole numbers', () => {
+      const data: Partial<ClinicCharge> = { amount: 85 };
+      const result = valueSetter({ newValue: '100', data });
+      expect(result).toBe(true);
+      expect(data.amount).toBe(100);
+    });
+  });
+
   it('datasource getRows should call getCharges and invoke successCallback', () => {
     const successCb = vi.fn();
     const failCb = vi.fn();
@@ -70,13 +115,13 @@ describe('GridComponent', () => {
     expect(failCb).not.toHaveBeenCalled();
   });
 
-  it('datasource getRows should invoke failCallback on API error', () => {
+  it('datasource getRows should invoke failCallback and show toast on API error', () => {
     mockChargeService.getCharges.mockReturnValue(throwError(() => new Error('Network error')));
     const successCb = vi.fn();
     const failCb = vi.fn();
     component.datasource.getRows({ startRow: 0, endRow: 10, successCallback: successCb, failCallback: failCb } as any);
     expect(failCb).toHaveBeenCalled();
-    expect(component.errorMessage()).not.toBe('');
+    expect(mockToastService.show).toHaveBeenCalledWith('Failed to load clinic charges. Please try again.');
   });
 
   it('should set lastRow to -1 when more data exists beyond endRow', () => {
@@ -99,7 +144,7 @@ describe('GridComponent', () => {
     expect(mockChargeService.updateCharge).toHaveBeenCalledWith(1, { amount: 99.99 });
   });
 
-  it('onCellValueChanged should revert cell value on update error', () => {
+  it('onCellValueChanged should revert cell value and show toast on update error', () => {
     mockChargeService.updateCharge.mockReturnValue(throwError(() => new Error('fail')));
     const setDataValue = vi.fn();
     const event = {
@@ -111,6 +156,7 @@ describe('GridComponent', () => {
     } as any;
     component.onCellValueChanged(event);
     expect(setDataValue).toHaveBeenCalledWith('amount', 85);
+    expect(mockToastService.show).toHaveBeenCalledWith('Failed to update charge. Changes reverted.');
   });
 
   it('onCellValueChanged should do nothing when event has no id', () => {

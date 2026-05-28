@@ -7,6 +7,7 @@ import {
   createMockClinicChargeService,
   mockClinicCharge,
 } from '../../../../shared/testing/clinic-charge.testing';
+import { CHARGE_TYPES } from '../../../../shared/constants/charge-types';
 
 describe('CreateChargeModalComponent', () => {
   let component: CreateChargeModalComponent;
@@ -47,7 +48,7 @@ describe('CreateChargeModalComponent', () => {
     component.newCharge = {
       medical_centre_name: 'Clinic',
       patient_visit_type: 'Visit',
-      charge_type: 'Consult',
+      charge_type: CHARGE_TYPES[0],
       amount: 0,
     };
     component.onSubmit();
@@ -58,7 +59,7 @@ describe('CreateChargeModalComponent', () => {
     component.newCharge = {
       medical_centre_name: 'Clinic',
       patient_visit_type: 'Visit',
-      charge_type: 'Consult',
+      charge_type: CHARGE_TYPES[0],
       amount: 23.0123,
     };
     component.onSubmit();
@@ -71,7 +72,7 @@ describe('CreateChargeModalComponent', () => {
     component.newCharge = {
       medical_centre_name: 'Clinic',
       patient_visit_type: 'Standard',
-      charge_type: 'Consultation',
+      charge_type: CHARGE_TYPES[0],
       amount: 85,
     };
     component.onSubmit();
@@ -85,7 +86,7 @@ describe('CreateChargeModalComponent', () => {
     component.newCharge = {
       medical_centre_name: 'Clinic',
       patient_visit_type: 'Standard',
-      charge_type: 'Consultation',
+      charge_type: CHARGE_TYPES[0],
       amount: 85,
     };
     component.onSubmit();

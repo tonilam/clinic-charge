@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
-import { ChargeCreate } from '../../../../shared/models/clinic-charge.model';
+import { ChargeCreate, ChargeFormState } from '../../../../shared/models/clinic-charge.model';
 import { CHARGE_TYPES } from '../../../../shared/constants/charge-types';
 import {
   FORM_INPUT_CLASS,
@@ -31,7 +31,7 @@ export class CreateChargeModalComponent {
 
   creating = signal(false);
   createError = signal('');
-  newCharge: ChargeCreate = createEmptyCharge();
+  newCharge: ChargeFormState = createEmptyCharge();
 
   onCancel(): void {
     this.cancelled.emit();
@@ -59,7 +59,7 @@ export class CreateChargeModalComponent {
     this.creating.set(true);
     this.createError.set('');
 
-    this.chargeService.createCharge(this.newCharge).subscribe({
+    this.chargeService.createCharge(this.newCharge as ChargeCreate).subscribe({
       next: () => {
         this.creating.set(false);
         this.created.emit();

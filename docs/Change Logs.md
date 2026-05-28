@@ -1,5 +1,12 @@
 ## 28-05-2026
 
+- Frontend UX: added global toast notifications via new `ToastService` and standalone `ToastComponent`; dashboard now renders `<app-toast />` for centralized success/error/info feedback
+- Grid inline editing: replaced `errorMessage` UI with toast errors for load/update failures; failed updates now revert safely with guarded `isReverting` flow to prevent recursive cell-change handling
+- Charge type consistency: introduced `ChargeType` model typing from `CHARGE_TYPES`; updated `ClinicCharge`, `ChargeCreate`, and `ChargeUpdate` to use typed charge values
+- Create modal form state: added `ChargeFormState` with optional empty `charge_type` for form initialization, while preserving strict `ChargeCreate` payload typing on submit
+- Grid data validation: `amount` column now uses a `valueSetter` with `hasAtMostTwoDecimalPlaces()` validation and toast feedback; `charge_type` column now uses AG Grid select editor values from `CHARGE_TYPES`
+- Frontend tests updated to align with typed charge values, new toast dependency, and refined grid/edit behavior across service, modal, and grid specs
+
 - AG Grid v33 Theming API: dropped legacy `ag-grid.css` / `ag-theme-quartz.css` from `angular.json` and `ag-theme-quartz` wrapper class; grid binds `themeQuartz` via `[theme]` (resolves console error #239 mixed-theming warning)
 - AG Grid header tooltips: `enableBrowserTooltips` and `tooltipShowDelay` on grid so drag-to-reorder hint shows on column header hover; unit test asserts `themeQuartz` binding
 

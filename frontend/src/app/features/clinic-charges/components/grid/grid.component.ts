@@ -12,13 +12,17 @@ import {
   InfiniteRowModelModule,
   NumberEditorModule,
   PaginationModule,
+  SelectEditorModule,
   TextEditorModule,
   TooltipModule,
   _ColumnMoveModule,
   themeQuartz,
 } from 'ag-grid-community';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
+import { ToastService } from '../../../../core/services/toast.service';
 import { ClinicCharge } from '../../../../shared/models/clinic-charge.model';
+import { CHARGE_TYPES } from '../../../../shared/constants/charge-types';
+import { hasAtMostTwoDecimalPlaces } from '../../../../shared/helpers/clinic-charge.helpers';
 
 const COLUMN_REORDER_HEADER_TOOLTIP = 'Drag the column header to reorder columns';
 
@@ -27,6 +31,7 @@ ModuleRegistry.registerModules([
   PaginationModule,
   TextEditorModule,
   NumberEditorModule,
+  SelectEditorModule,
   TooltipModule,
   _ColumnMoveModule,
 ]);
@@ -39,12 +44,13 @@ ModuleRegistry.registerModules([
 })
 export class GridComponent implements OnDestroy {
   private chargeService = inject(ClinicChargeService);
+  private toastService = inject(ToastService);
   private gridApi: GridApi | null = null;
+  private isReverting = false;
 
   readonly theme = themeQuartz;
 
   loading = signal(false);
-  errorMessage = signal('');
 
   columnDefs: ColDef[] = [
     { field: 'id', headerName: 'ID', editable: false, width: 80 },
@@ -60,13 +66,28 @@ export class GridComponent implements OnDestroy {
       editable: true,
       flex: 1,
     },
-    { field: 'charge_type', headerName: 'Charge Type', editable: true, flex: 1 },
+    {
+      field: 'charge_type',
+      headerName: 'Charge Type',
+      editable: true,
+      flex: 1,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: { values: CHARGE_TYPES },
+    },
     {
       field: 'amount',
       headerName: 'Amount ($)',
       editable: true,
       flex: 1,
       valueFormatter: (p) => (p.value != null ? `$${Number(p.value).toFixed(2)}` : ''),
+      valueSetter: (params) => {
+        if (!hasAtMostTwoDecimalPlaces(Number(params.newValue))) {
+          this.toastService.show('Amount must have at most 2 decimal places.');
+          return false;
+        }
+        params.data.amount = Number(params.newValue);
+        return true;
+      },
     },
   ];
 
@@ -87,7 +108,7 @@ export class GridComponent implements OnDestroy {
         },
         error: () => {
           this.loading.set(false);
-          this.errorMessage.set('Failed to load clinic charges. Please try again.');
+          this.toastService.show('Failed to load clinic charges. Please try again.');
           params.failCallback();
         },
       });
@@ -110,6 +131,7 @@ export class GridComponent implements OnDestroy {
   }
 
   onCellValueChanged(event: CellValueChangedEvent<ClinicCharge>): void {
+    if (this.isReverting) return;
     if (!event.data?.id) return;
     const field = event.colDef.field as keyof ClinicCharge;
     if (!field) return;
@@ -117,10 +139,16 @@ export class GridComponent implements OnDestroy {
     const payload = { [field]: event.newValue };
     this.chargeService.updateCharge(event.data.id, payload).subscribe({
       error: () => {
-        event.node.setDataValue(field, event.oldValue);
-        this.errorMessage.set('Failed to update charge. Changes reverted.');
+        this.revertCell(event.node, field, event.oldValue);
+        this.toastService.show('Failed to update charge. Changes reverted.');
       },
     });
+  }
+
+  private revertCell(node: CellValueChangedEvent['node'], field: keyof ClinicCharge, value: unknown): void {
+    this.isReverting = true;
+    node.setDataValue(field, value);
+    this.isReverting = false;
   }
 
   refreshGrid(): void {

@@ -1,8 +1,12 @@
+import { CHARGE_TYPES } from '../constants/charge-types';
+
+export type ChargeType = (typeof CHARGE_TYPES)[number];
+
 export interface ClinicCharge {
   id: number;
   medical_centre_name: string;
   patient_visit_type: string;
-  charge_type: string;
+  charge_type: ChargeType;
   amount: number;
   created_at: string;
   updated_at: string;
@@ -23,14 +27,18 @@ export interface GridResponse {
 export interface ChargeCreate {
   medical_centre_name: string;
   patient_visit_type: string;
-  charge_type: string;
+  charge_type: ChargeType;
   amount: number;
+}
+
+export interface ChargeFormState extends Omit<ChargeCreate, 'charge_type'> {
+  charge_type: ChargeType | '';
 }
 
 export interface ChargeUpdate {
   medical_centre_name?: string;
   patient_visit_type?: string;
-  charge_type?: string;
+  charge_type?: ChargeType;
   amount?: number;
 }
 
