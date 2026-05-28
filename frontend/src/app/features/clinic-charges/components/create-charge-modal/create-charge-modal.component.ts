@@ -4,7 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { ClinicChargeService } from '../../../../core/services/clinic-charge.service';
 import { ChargeCreate } from '../../../../shared/models/clinic-charge.model';
 import { FORM_INPUT_CLASS } from '../../../../shared/constants/form-classes';
-import { createEmptyCharge } from '../../../../shared/helpers/clinic-charge.helpers';
+import {
+  createEmptyCharge,
+  hasAtMostTwoDecimalPlaces,
+} from '../../../../shared/helpers/clinic-charge.helpers';
 
 @Component({
   selector: 'app-create-charge-modal',
@@ -40,6 +43,10 @@ export class CreateChargeModalComponent {
     }
     if (this.newCharge.amount <= 0) {
       this.createError.set('Amount must be greater than 0.');
+      return;
+    }
+    if (!hasAtMostTwoDecimalPlaces(this.newCharge.amount)) {
+      this.createError.set('Amount must have at most 2 decimal places.');
       return;
     }
 

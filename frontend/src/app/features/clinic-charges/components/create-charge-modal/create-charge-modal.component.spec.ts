@@ -54,6 +54,18 @@ describe('CreateChargeModalComponent', () => {
     expect(component.createError()).not.toBe('');
   });
 
+  it('onSubmit should show error when amount has more than 2 decimal places', () => {
+    component.newCharge = {
+      medical_centre_name: 'Clinic',
+      patient_visit_type: 'Visit',
+      charge_type: 'Consult',
+      amount: 23.0123,
+    };
+    component.onSubmit();
+    expect(component.createError()).toBe('Amount must have at most 2 decimal places.');
+    expect(mockChargeService.createCharge).not.toHaveBeenCalled();
+  });
+
   it('onSubmit should call createCharge and emit created on success', async () => {
     const createdSpy = vi.spyOn(component.created, 'emit');
     component.newCharge = {
