@@ -63,7 +63,7 @@ class TestCreateCharge:
         payload = {
             "medical_centre_name": "Metro Hospital",
             "patient_visit_type": "Private Patient",
-            "charge_type": "Surgery",
+            "charge_type": "Consultation",
             "amount": 500.00,
         }
         response = await client.post("/api/charges", json=payload)
@@ -74,18 +74,29 @@ class TestCreateCharge:
         payload = {
             "medical_centre_name": "Metro Hospital",
             "patient_visit_type": "Private Patient",
-            "charge_type": "Surgery",
+            "charge_type": "Consultation",
             "amount": 500.00,
         }
         response = await client.post("/api/charges", json=payload)
         data = response.json()
         assert data["id"] is not None
-        assert data["charge_type"] == "Surgery"
+        assert data["charge_type"] == "Consultation"
         assert float(data["amount"]) == 500.00
 
     @pytest.mark.asyncio
     async def test_create_charge_invalid_missing_fields_returns_422(self, client):
-        response = await client.post("/api/charges", json={"charge_type": "Surgery"})
+        response = await client.post("/api/charges", json={"charge_type": "Consultation"})
+        assert response.status_code == 422
+
+    @pytest.mark.asyncio
+    async def test_create_charge_invalid_charge_type_returns_422(self, client):
+        payload = {
+            "medical_centre_name": "Metro Hospital",
+            "patient_visit_type": "Private Patient",
+            "charge_type": "Surgery",
+            "amount": 500.00,
+        }
+        response = await client.post("/api/charges", json=payload)
         assert response.status_code == 422
 
     @pytest.mark.asyncio
@@ -93,7 +104,7 @@ class TestCreateCharge:
         payload = {
             "medical_centre_name": "Metro Hospital",
             "patient_visit_type": "Private Patient",
-            "charge_type": "Surgery",
+            "charge_type": "Consultation",
             "amount": 0,
         }
         response = await client.post("/api/charges", json=payload)

@@ -51,6 +51,15 @@ class TestChargeCreate:
                 amount=-10,
             )
 
+    def test_invalid_charge_type_raises_error(self):
+        with pytest.raises(ValidationError):
+            ChargeCreate(
+                medical_centre_name="City Medical",
+                patient_visit_type="Standard",
+                charge_type="Surgery",
+                amount=150.00,
+            )
+
 
 class TestChargeUpdate:
     def test_partial_update_amount_only(self):

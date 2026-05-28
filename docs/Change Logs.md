@@ -1,5 +1,8 @@
 ## 28-05-2026
 
+- Backend validation: added `ChargeType` `Literal` type in `schemas.py` covering the 10 allowed charge types; `ChargeBase.charge_type` and `ChargeUpdate.charge_type` now reject invalid values with 422
+- Tests: updated integration tests to use valid charge type values; added `test_create_charge_invalid_charge_type_returns_422` and `test_invalid_charge_type_raises_error` unit test
+
 - Cleanup: removed unused `frontend/src/app/app.css` and `frontend/e2e/utils/api-helper.ts`; removed tracked Playwright report artifacts under `frontend/e2e/test-results/`
 - Test code cleanup: removed redundant self-explanatory comments in `frontend/e2e/tests/editing.spec.ts` and `backend/tests/unit/test_schemas.py`
 
